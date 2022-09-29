@@ -3,18 +3,16 @@ on:
   push:
   pull_request:
   schedule:
-    - cron: "0 8,20 * * *"
+    - cron: "0 6,18 * * *"
 jobs:
   build:
     name: "Fly, you fools"
     runs-on: ubuntu-latest
     steps:
       - run: |
-          curl -X POST --location "https://api.telegram.org/bot${BOT_TOKEN}/sendAnimation" \
+          curl -X POST --location "https://api.telegram.org/bot${{ secrets.BOT_TOKEN }}/sendAnimation" \
               -H "Content-Type: application/json" \
               -d "{
                     \"chat_id\": -1001633660171,
                     \"animation\": \"CgACAgQAAxkBAAIFA2M1yWSae3Sr_ciIbHznCnTl2YTlAALXAgACcq4NU9Spth4OIezNKgQ\"
-                  }"
-        env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+                  }" 
